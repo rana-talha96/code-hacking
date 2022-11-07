@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Post;
+use App\Models\Photo;
+use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class PostController extends Controller
 {
@@ -13,7 +17,8 @@ class PostController extends Controller
      */
     public function index()
     {
-        return view('admin.posts.index');
+        $posts = Post::all();
+        return view('admin.posts.index', compact('posts'));
     }
 
     /**
@@ -23,7 +28,8 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view('admin.posts.create');
+        $categories = Category::all()->pluck('name', 'id');
+        return view('admin.posts.create', compact('categories'));
     }
 
     /**
@@ -34,7 +40,18 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        // return view('admin.posts.create');
+        $input = $request->all();
+        if ($file = $request->file('photo_id')){
+            $name = time() . $file->getClientOriginalName();
+            $file->move('images', $name);
+            $photo = Photo::create(['file'=>$name]);
+            $input['photo_id'] = $photo->id;
+        }
+        $user = auth()->user();
+        $input['user_id'] = $user->id;
+        Post::create($input);
+        Session::flash('add_new_post', 'New Post Added Succesfully');
+        return redirect(route('posts.index'));
     }
 
     /**
@@ -45,7 +62,8 @@ class PostController extends Controller
      */
     public function show($id)
     {
-        // return view('admin.posts.index');
+        $post = Post::findOrFail($id);
+        return view('admin.posts.show', compact('post'));
     }
 
     /**
@@ -56,7 +74,9 @@ class PostController extends Controller
      */
     public function edit($id)
     {
-        return view('admin.posts.edit');
+        $post = Post::findOrFail($id);
+        $categories = Category::all()->pluck('name', 'id');
+        return view('admin.posts.edit', compact('post', 'categories'));
     }
 
     /**
@@ -68,7 +88,18 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // return view('admin.posts.edit');
+        $post = Post::findOrFail($id);
+        $input = $request->all();
+
+        if ($file = $request->file('photo_id')){
+            $name = time() . $file->getClientOriginalName();
+            $file->move('images', $name);
+            $photo = Photo::create(['file'=>$name]);
+            $input['photo_id'] = $photo->id;
+        }
+        $post->update($input);
+        Session::flash('update_post', 'The Post update Succesfully');
+        return redirect(route('posts.index'));
     }
 
     /**
@@ -79,6 +110,10 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $post = Post::findOrFail($id);
+        unlink(public_path() . $post->photo->file);
+        $post->delete();
+        Session::flash('deleted_post', 'The Post has been Deleted Succesfully');
+        return redirect(route('posts.index', compact('post')));
     }
 }

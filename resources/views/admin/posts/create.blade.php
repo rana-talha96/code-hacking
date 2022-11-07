@@ -5,18 +5,43 @@
         <div class="container">
 
             <div class="d-flex justify-content-between align-items-center">
-                <h2>User Detail</h2>
+                <h2>Add New User</h2>
                 <ol>
-                    <li><a href="{{ route('home') }}">Home</a></li>
-                    <li>Add Posts</li>
+                    <li><a href="{{ route('posts.index') }}">Posts</a></li>
+                    <li>Add Post</li>
                 </ol>
             </div>
+            {!! Form::open(['url' => Route('posts.store'), 'files' => true]) !!}
+            @csrf
+            <h1>Create Post</h1>
 
+            <div class="form-group">
+                {!! Form::label('title', 'Post Title:') !!}
+                {!! Form::text('title', null, ['class' => 'form-control']) !!}
+            </div>
+
+            <div class="form-group">
+                {!! Form::label('body', 'Post Content:') !!}
+                {!! Form::text('body', null, ['class' => 'form-control']) !!}
+            </div>
+
+            <div class="form-group">
+                {!! Form::label('category_id', 'Category:') !!}
+                {!! Form::select('category_id', $categories, null, ['class' => 'form-control']) !!}
+            </div>
+
+            <div class="form-group">
+                {!! Form::label('photo_id', 'Select Photo:') !!}
+                {!! Form::file('photo_id', ['class' => 'form-control']) !!}
+            </div>
+
+            <br>
+            {!! Form::submit('Add Post', ['class' => 'btn btn-primary']) !!}
+
+            {!! Form::close() !!}
+
+
+            @include('includes.errors')
         </div>
     </section>
-    <div class="container">
-        <div class="row gy-4">
-            <h1>Add New Post</h1>
-        </div>
-    </div>
 @endsection

@@ -60,10 +60,6 @@
 
 
             @include('includes.errors')
-
-
-
-
         </div>
     </section>
 @endsection

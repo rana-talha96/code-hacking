@@ -27,8 +27,5 @@ Route::get('/portfolio', [App\Http\Controllers\HomeController::class, 'portfolio
 
 // Route::group(['middleware'=>'admin'], function(){
     Route::resource('admin/users', AdminUserController::class);
+    Route::resource('admin/posts', PostController::class);
 // });
-
-
-
-Route::resource('admin/posts', PostController::class);
