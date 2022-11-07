@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\UsersRequest;
 use App\Models\Role;
 use App\Models\User;
+use App\Models\Photo;
 use Illuminate\Http\Request;
+use App\Http\Requests\UsersRequest;
 use Illuminate\Support\Facades\Hash;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Support\Facades\Validator;
@@ -51,21 +52,25 @@ class AdminUserController extends Controller
      */
     public function store(UsersRequest $request)
     {
-        $this->validate($request, [
-            'name' => 'required|min:3|max:50',
-            'email' => 'required|email',
-            'role_id' => 'required',
-            'password' => 'required|confirmed|min:8',
-        ]);
-        $user = User::create([
-            'name' => $request['name'],
-            'role_id' => $request['role_id'],
-            'is_active' => $request['is_active'],
-            'email' => $request['email'],
-            'photo_id' => $request['photo_id'],
-            'password' => Hash::make($request['password']),
-        ]);
-        $user->save();
+        // $user = User::create([
+        //     'name' => $request['name'],
+        //     'role_id' => $request['role_id'],
+        //     'is_active' => $request['is_active'],
+        //     'email' => $request['email'],
+        //     'photo_id' => $request['photo_id'],
+        //     'password' => Hash::make($request['password']),
+        // ]);
+        
+        $input = $request->all();
+
+        if ($file = $request->file('photo_id')){
+            return "<h1>photo</h1>";
+            $name = time() . $file->getClientOriginalName();
+            $file->move('images', $name);
+            $photo = Photo::create(['file'=>$name]);
+            $input['photo_id'] = $photo->id;
+        }
+        User::create($input);
         return redirect(route('users.index'));
     }
 

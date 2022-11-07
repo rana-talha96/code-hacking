@@ -11,7 +11,7 @@
                     <li>Register</li>
                 </ol>
             </div>
-            {!! Form::open(['url' => Route('users.store')]) !!}
+            {!! Form::open(['url' => Route('users.store'), 'files'=>true ]) !!}
             @csrf
             <h1>Create Post</h1>
 
@@ -37,7 +37,7 @@
 
             <div class="form-group">
                 {!! Form::label('photo_id', 'Select Photo:') !!}
-                {!! Form::file('photo_id',['class' => 'form-control']) !!}
+                {!! Form::file('photo_id', ['class' => 'form-control']) !!}
             </div>
 
             <div class="form-group">
