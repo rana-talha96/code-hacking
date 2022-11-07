@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Hash;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Support\Facades\Session;
 
 class AdminUserController extends Controller
 {
@@ -61,8 +62,14 @@ class AdminUserController extends Controller
         //     'photo_id' => $request['photo_id'],
         //     'password' => Hash::make($request['password']),
         // ]);
-        
+
         $input = $request->all();
+
+        // if($request->file('photo_id')){
+        //     return 'photo';
+        // } else {
+        //     return 'no photo';
+        // }
 
         if ($file = $request->file('photo_id')){
             $name = time() . $file->getClientOriginalName();
@@ -72,6 +79,7 @@ class AdminUserController extends Controller
         }
         $input['password'] = bcrypt($request['password']);
         User::create($input);
+        Session::flash('add_new_user', 'New User Added Succesfully');
         return redirect(route('users.index'));
     }
 
@@ -118,6 +126,7 @@ class AdminUserController extends Controller
             $input['photo_id'] = $photo->id;
         }
         $user->update($input);
+        Session::flash('update_user', 'The User Data update Succesfully');
         return redirect(route('users.index'));
     }
 
@@ -129,6 +138,9 @@ class AdminUserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user = User::findOrFail($id);
+        $user->delete();
+        Session::flash('deleted_user', 'The User has been Deleted Succesfully');
+        return redirect(route('users.index', compact('user')));
     }
 }

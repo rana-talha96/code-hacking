@@ -14,10 +14,11 @@
             <div class="row">
                 <div class="col-sm-3">
                     <br>
-                    <img src="{{ $user->photo ? $user->photo->file : 'https://media.istockphoto.com/id/535851101/photo/male-silhouette-portrait-icon-with-question-mark-sign.jpg?s=1024x1024&w=is&k=20&c=-7OFe34s_c0xnyjUwg-fuX_HPsGO-kCCv2Idt16RCJA='}}" alt="" class="img-thumbnail">
+                    <img src="{{ $user->photo ? $user->photo->file : 'https://media.istockphoto.com/id/535851101/photo/male-silhouette-portrait-icon-with-question-mark-sign.jpg?s=1024x1024&w=is&k=20&c=-7OFe34s_c0xnyjUwg-fuX_HPsGO-kCCv2Idt16RCJA=' }}"
+                        alt="" class="img-thumbnail">
                 </div>
                 <div class="col-sm-9">
-                    {!! Form::model($user, ['method'=> 'PATCH', 'url' => Route('users.update', $user->id), 'files' => true]) !!}
+                    {!! Form::model($user, ['method' => 'PATCH', 'url' => Route('users.update', $user->id), 'files' => true]) !!}
                     @csrf
 
                     <div class="form-group">
@@ -55,10 +56,15 @@
                         {!! Form::password('password_confirmation', ['class' => 'form-control']) !!}
                     </div> --}}
                     <br>
-                    {!! Form::submit('Register', ['class' => 'btn btn-primary']) !!}
+                    <div class="form-group d-flex">
+                        {!! Form::submit('Update User', ['class' => 'btn btn-primary me-3']) !!}
 
-                    {!! Form::close() !!}
+                        {!! Form::close() !!}
 
+                        {!! Form::open(['method' => 'DELETE', 'url' => Route('users.destroy', $user->id)]) !!}
+                        {!! Form::submit('Delete User', ['class' => 'btn btn-danger']) !!}
+                        {!! Form::close() !!}
+                    </div>
 
                     @include('includes.errors')
                 </div>
