@@ -18,6 +18,7 @@
 
                         <li><a href="<?php echo e(route('users.index')); ?>">Users Detail</a></li>
                         <li><a href="<?php echo e(route('posts.index')); ?>">Posts Detail</a></li>
+                        <li><a href="<?php echo e(route('categories.index')); ?>">Categories Detail</a></li>
 
                         <li class="dropdown"><a href="#"><span>Deep Drop Down</span> <i
                                     class="bi bi-chevron-right"></i></a>
