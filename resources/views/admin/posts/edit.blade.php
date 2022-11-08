@@ -8,7 +8,7 @@
                 <h2>Edit User</h2>
                 <ol>
                     <li><a href="{{ route('home') }}">Home</a></li>
-                    <li>Edit User againt ID = {{ $post->id }}</li>
+                    <li>Edit Post againt ID = {{ $post->id }}</li>
                 </ol>
             </div>
             <div class="row">
@@ -29,7 +29,7 @@
 
                     <div class="form-group">
                         {!! Form::label('body', 'Post Content:') !!}
-                        {!! Form::text('body', null, ['class' => 'form-control']) !!}
+                        {!! Form::textarea('body', null, ['class' => 'form-control']) !!}
                     </div>
 
                     <div class="form-group">

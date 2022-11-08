@@ -22,7 +22,7 @@
 
             <div class="form-group">
                 {!! Form::label('body', 'Post Content:') !!}
-                {!! Form::text('body', null, ['class' => 'form-control']) !!}
+                {!! Form::textarea('body', null, ['class' => 'form-control']) !!}
             </div>
 
             <div class="form-group">
