@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->id()->unsigned()->index();
+            $table->integer('id')->unsigned()->autoIncrement();
             $table->integer('role_id')->index()->unsigned()->nullable();
             $table->integer('is_active')->default(0);
             $table->string('name');

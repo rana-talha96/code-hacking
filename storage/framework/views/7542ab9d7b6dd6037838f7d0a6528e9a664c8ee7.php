@@ -1,5 +1,3 @@
-
-
 <?php $__env->startSection('content'); ?>
     <section id="breadcrumbs highfy" class="breadcrumbs">
         <div class="container">
@@ -76,10 +74,6 @@
 
 
             <?php echo $__env->make('includes.errors', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-
-
-
-
         </div>
     </section>
 <?php $__env->stopSection(); ?>
