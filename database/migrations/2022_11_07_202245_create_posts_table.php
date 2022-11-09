@@ -18,7 +18,7 @@ return new class extends Migration
             $table->id();
             $table->integer('user_id')->unsigned();
             $table->integer('category_id')->unsigned();
-            $table->integer('photo_id');
+            $table->integer('photo_id')->unsigned()->nullable();
             $table->string('title');
             $table->text('body');
             $table->timestamps();

@@ -19,6 +19,7 @@
                         <li><a href="{{ route('users.index') }}">Users Detail</a></li>
                         <li><a href="{{ route('posts.index') }}">Posts Detail</a></li>
                         <li><a href="{{ route('categories.index') }}">Categories Detail</a></li>
+                        <li><a href="{{ route('photos.index') }}">Photo Detail</a></li>
 
                         <li class="dropdown"><a href="#"><span>Deep Drop Down</span> <i
                                     class="bi bi-chevron-right"></i></a>

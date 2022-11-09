@@ -76,9 +76,13 @@ class AdminUserController extends Controller
             $file->move('images', $name);
             $photo = Photo::create(['file'=>$name]);
             $input['photo_id'] = $photo->id;
+            $input['password'] = bcrypt($request['password']);
+            $user = User::create($input);
+            Photo::where('id', $photo->id)->update(array('user_id' => $user->id));
+        } else {
+            $input['password'] = bcrypt($request['password']);
+            User::create($input);
         }
-        $input['password'] = bcrypt($request['password']);
-        User::create($input);
         Session::flash('add_new_user', 'New User Added Succesfully');
         return redirect(route('users.index'));
     }
@@ -120,10 +124,16 @@ class AdminUserController extends Controller
         $input = $request->all();
 
         if ($file = $request->file('photo_id')){
+            if ($user->photo_id){
+                $photo = Photo::findOrFail($user->photo->id);
+                unlink(public_path() . $photo->file);
+                $photo->delete();
+            }
             $name = time() . $file->getClientOriginalName();
             $file->move('images', $name);
             $photo = Photo::create(['file'=>$name]);
             $input['photo_id'] = $photo->id;
+            Photo::where('id', $photo->id)->update(array('user_id' => $user->id));
         }
         $user->update($input);
         Session::flash('update_user', 'The User Data update Succesfully');

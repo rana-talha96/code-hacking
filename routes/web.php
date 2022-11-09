@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminUserController;
 use App\Http\Controllers\CategoriesController;
+use App\Http\Controllers\PhotoController;
 use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -30,4 +31,5 @@ Route::get('/portfolio', [App\Http\Controllers\HomeController::class, 'portfolio
     Route::resource('admin/users', AdminUserController::class);
     Route::resource('admin/posts', PostController::class);
     Route::resource('admin/categories', CategoriesController::class);
+    Route::get('admin/photo', [PhotoController::class, 'index'])->name('photos.index');
 // });

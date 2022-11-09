@@ -46,10 +46,17 @@ class PostController extends Controller
             $file->move('images', $name);
             $photo = Photo::create(['file'=>$name]);
             $input['photo_id'] = $photo->id;
+            $input['password'] = bcrypt($request['password']);
+            $user = auth()->user();
+            $input['user_id'] = $user->id;
+            $post = Post::create($input);
+            Photo::where('id', $photo->id)->update(array('post_id' => $post->id));
+        } else {
+            $input['password'] = bcrypt($request['password']);
+            $user = auth()->user();
+            $input['user_id'] = $user->id;
+            Post::create($input);
         }
-        $user = auth()->user();
-        $input['user_id'] = $user->id;
-        Post::create($input);
         Session::flash('add_new_post', 'New Post Added Succesfully');
         return redirect(route('posts.index'));
     }
@@ -92,10 +99,16 @@ class PostController extends Controller
         $input = $request->all();
 
         if ($file = $request->file('photo_id')){
+            if ($post->photo_id){
+                $photo = Photo::findOrFail($post->photo->id);
+                unlink(public_path() . $photo->file);
+                $photo->delete();
+            }
             $name = time() . $file->getClientOriginalName();
             $file->move('images', $name);
             $photo = Photo::create(['file'=>$name]);
             $input['photo_id'] = $photo->id;
+            Photo::where('id', $photo->id)->update(array('post_id' => $post->id));
         }
         $post->update($input);
         Session::flash('update_post', 'The Post update Succesfully');

@@ -16,6 +16,8 @@ return new class extends Migration
         Schema::create('photos', function (Blueprint $table) {
             $table->id();
             $table->string('file');
+            $table->integer('post_id')->unsigned()->default(0);
+            $table->integer('user_id')->unsigned()->default(0);
             $table->timestamps();
         });
     }
