@@ -8,6 +8,7 @@
                 <h2>Photo Detail</h2>
                 <ol>
                     <li><a href="{{ route('home') }}">Home</a></li>
+                    <li><a href="{{ route('photos.create') }}">Upload Photos</a></li>
                 </ol>
             </div>
 
@@ -41,7 +42,7 @@
                                 @elseif ($photo->post)
                                     <td>Post ID:- {{ $photo->post->id }}</td>
                                 @else
-                                    <td>No User or Post</td>
+                                    <td>No User or Post ID</td>
                                 @endif
                                 <td>{{ $photo->created_at->format('d-m-Y') }}</td>
                                 <td>{{ $photo->updated_at->diffForHumans() }}</td>

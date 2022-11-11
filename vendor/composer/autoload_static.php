@@ -549,6 +549,8 @@ class ComposerStaticInit095b0d6cb7b94dac4459307570ba3df9
         'App\\Http\\Requests\\UsersRequest' => __DIR__ . '/../..' . '/app/Http/Requests/UsersRequest.php',
         'App\\Http\\Requests\\userEditRequest' => __DIR__ . '/../..' . '/app/Http/Requests/userEditRequest.php',
         'App\\Models\\Category' => __DIR__ . '/../..' . '/app/Models/Category.php',
+        'App\\Models\\Comment' => __DIR__ . '/../..' . '/app/Models/Comment.php',
+        'App\\Models\\CommentReply' => __DIR__ . '/../..' . '/app/Models/CommentReply.php',
         'App\\Models\\Photo' => __DIR__ . '/../..' . '/app/Models/Photo.php',
         'App\\Models\\Post' => __DIR__ . '/../..' . '/app/Models/Post.php',
         'App\\Models\\Role' => __DIR__ . '/../..' . '/app/Models/Role.php',

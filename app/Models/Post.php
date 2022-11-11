@@ -15,6 +15,8 @@ class Post extends Model
         'body',
     ];
 
+    use HasFactory;
+
     public function photo()
     {
         return $this->belongsTo(Photo::class);
@@ -30,5 +32,8 @@ class Post extends Model
         return $this->belongsTo(Category::class);
     }
 
-    use HasFactory;
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
 }

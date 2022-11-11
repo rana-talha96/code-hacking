@@ -15,7 +15,7 @@ return new class extends Migration
     {
         // Schema::enableForeignKeyConstraints();
         Schema::create('posts', function (Blueprint $table) {
-            $table->id();
+            $table->integer('id')->unsigned()->autoIncrement();
             $table->integer('user_id')->unsigned();
             $table->integer('category_id')->unsigned();
             $table->integer('photo_id')->unsigned()->nullable();

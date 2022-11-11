@@ -34,6 +34,8 @@ return array(
     'App\\Http\\Requests\\UsersRequest' => $baseDir . '/app/Http/Requests/UsersRequest.php',
     'App\\Http\\Requests\\userEditRequest' => $baseDir . '/app/Http/Requests/userEditRequest.php',
     'App\\Models\\Category' => $baseDir . '/app/Models/Category.php',
+    'App\\Models\\Comment' => $baseDir . '/app/Models/Comment.php',
+    'App\\Models\\CommentReply' => $baseDir . '/app/Models/CommentReply.php',
     'App\\Models\\Photo' => $baseDir . '/app/Models/Photo.php',
     'App\\Models\\Post' => $baseDir . '/app/Models/Post.php',
     'App\\Models\\Role' => $baseDir . '/app/Models/Role.php',

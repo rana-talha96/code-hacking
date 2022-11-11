@@ -18,6 +18,7 @@
 
                         <li><a href="{{ route('users.index') }}">Users Detail</a></li>
                         <li><a href="{{ route('posts.index') }}">Posts Detail</a></li>
+                        <li><a href="{{ route('comments.index') }}">Posts Comments</a></li>
                         <li><a href="{{ route('categories.index') }}">Categories Detail</a></li>
                         <li><a href="{{ route('photos.index') }}">Photo Detail</a></li>
 

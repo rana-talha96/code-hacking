@@ -12,4 +12,18 @@ class PhotoController extends Controller
         $photos = Photo::all();
         return view('admin.photo.index', compact('photos'));
     }
+
+    public function create()
+    {
+        return view('admin.photo.create');
+    }
+
+    public function store(Request $request)
+    {
+        $file = $request->file('file');
+        $name = time() . $file->getClientOriginalName();
+        $file->move('images', $name);
+        Photo::create(['file'=>$name]);
+        
+    }
 }
